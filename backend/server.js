@@ -6,7 +6,17 @@ const connectDB = require("./config/db");
 const app = express();
 connectDB();
 
-app.use(cors());
+app.use(
+  cors({
+    origin: [
+      "http://localhost:5173",
+      "https://mini-social-fjcb-adityas-projects-ed3eaaae.vercel.app"
+    ],
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    credentials: true,
+  })
+);
+
 app.use(express.json({ limit: "10mb" }));
 
 app.use("/api/auth", require("./routes/auth"));
